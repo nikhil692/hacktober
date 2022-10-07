@@ -1,0 +1,57 @@
+class pair :
+         
+    def __init__(self, first, second):
+        self.first = first
+        self.second = second
+ 
+# Return if position is valid on chessboard
+def range(n , x , y):
+    return (x <= n and x > 0 and y <= n and y > 0)
+ 
+# Return the number of moves with a given direction
+def check(n , x , y , xx , yy, mp):
+    ans = 0
+ 
+    # Checking valid move of Queen in a direction.
+    while range(n, x, y) and pair(x, y) not in mp :
+        x += xx
+        y += yy
+        ans = ans+1
+ 
+    return ans
+ 
+# Return the number of position a Queen can move.
+def numberofPosition(n , k , x , y , obstPosx , obstPosy):
+    ans = 0
+    mp = {}
+ 
+    # Mapping each obstacle's position
+    while (k > 0):
+        k -= 1
+        x1 = obstPosx[k]
+        y1 = obstPosy[k]
+ 
+        mp[pair(x1, y1)] = 1
+ 
+        # Fetching number of position a queen can
+        # move in each direction.
+        ans += check(n, x + 1, y, 1, 0, mp)
+        ans += check(n, x - 1, y, -1, 0, mp)
+        ans += check(n, x, y + 1, 0, 1, mp)
+        ans += check(n, x, y - 1, 0, -1, mp)
+        ans += check(n, x + 1, y + 1, 1, 1, mp)
+        ans += check(n, x + 1, y - 1, 1, -1, mp)
+        ans += check(n, x - 1, y + 1, -1, 1, mp)
+ 
+    return ans
+ 
+# Driven Program
+ 
+n = 8 # Chessboard size
+k = 1 # Number of obstacles
+Qposx = 4 # Queen x position
+Qposy = 4 # Queen y position
+obstPosx = [ 3 ] # x position of obstacles
+obstPosy = [ 5 ] # y position of obstacles
+ 
+print(numberofPosition(n, k, Qposx, Qposy, obstPosx, obstPosy))
