@@ -3,7 +3,7 @@ import java.util.Arrays;
 
 // Java program to find the largest
 // subset which was each pair
-// is divisible.
+// is divisible
 class GFG {
 
 	// function to find the longest Subsequence
